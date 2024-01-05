@@ -7,8 +7,6 @@ understanding of how to use the Camunda Platform 7 and how to develop with Camun
 
 - [ ] [Camunda 7 - Platform Foundation](https://academy.camunda.com/c7-platform-foundation)
 - [ ] [Camunda 7 - Platform for Java Developers](https://academy.camunda.com/c7-platform-java)
-- [ ] [Camunda 7 - Platform & Microservices](https://academy.camunda.com/c7-platform-microservices)
-- [ ] [Camunda 7 - Platform for DevOps](https://academy.camunda.com/c7-platform-devops)
 
 ## 2. Camunda 7 Application 'exam-registration'
 At this point, you already know the business context. You and your team have decided to specify this a little further 
