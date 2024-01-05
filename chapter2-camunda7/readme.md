@@ -14,6 +14,11 @@ understanding of how to use the Camunda Platform 7 and how to develop with Camun
 At this point, you already know the business context. You and your team have decided to specify this a little further 
 so that it is clear how you want to develop the process in camunda.
 
+Please read the business context again and adapt your modeled BPMN2.0 model according to the technical specifications. 
+It is then your task to implement the BPMN2.0 model using Camunda 7 and SpringBoot.
+Remember: Everyone models and implements things differently. It is important that you fulfill the requirements 
+accordingly.
+
 ### Business Context:
 <u>In concrete terms, the following should be implemented with camunda:</u>
 
