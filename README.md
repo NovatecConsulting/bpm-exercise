@@ -2,28 +2,18 @@
 
 ### Welcome to the Novatec BPM-Training Project!
 
-We have created this repository to familiarize our internal trainees with the topic of BPM. It is divided into two
-chapters: 
-
-1. In the first chapter you will learn the basics of process modeling, specifically with BPMN 2.0.
-Therefore, you´re going to model a process by a given business context.
-
-
-2. The second chapter deals with Camunda 7 and will give you an introduction to process automation.
-The second chapter also includes to implement your previously modeled bpmn-process with Camunda7 and
-Spring-Boot.</p>
+### This is the Solution Branch!
+In the linked chapters you will find the respective solution for the task set. Please note: This is a possible solution.
 
 ---
 
 ### [Chapter1: BPMN 2.0](/chapter1-bpmn/readme.md)
 
-- Learning Video: BPMN 2.0 by Camunda
-- Model BPMN 'exam-registration'
+- Solution: BPMN2.0 Model: 'exam-registration'
 
 ### [Chapter2: Camunda 7](/chapter2-camunda7/readme.md)
 
-- Learning Videos: Camunda 7 by Camunda
-- Develop Camunda 7 Application 'exam-registration'
+- Solution: Camunda 7 Application 'exam-registration'
 
 ---
 
