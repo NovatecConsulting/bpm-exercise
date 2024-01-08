@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="examRegistrationDMN" name="examRegistrationDMN" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="examRegistrationPeriod" name="examRegistrationPeriod">
+    <decisionTable id="DecisionTable_1bwqnwv" hitPolicy="FIRST">
+      <input id="InputClause_1hbmpe1" label="actualDate" biodi:width="389">
+        <inputExpression id="LiteralExpression_1sl001c" typeRef="dateTime">
+          <text>actualDate</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0y1cb8j" label="isRegistrationPeriod" name="isRegistrationPeriod" typeRef="boolean" biodi:width="397" />
+      <rule id="DecisionRule_0v8b6yb">
+        <description>First Registration Period 2024</description>
+        <inputEntry id="UnaryTests_02hl0h3">
+          <text>[date and time("2024-01-03T00:00:00")..date and time("2024-01-20T00:00:00")]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w0zcdz">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0d8mqq1">
+        <description>Secon Registration Period 2024</description>
+        <inputEntry id="UnaryTests_07dr543">
+          <text>[date and time("2024-06-20T00:00:00")..date and time("2024-06-30T00:00:00")]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1l4dbr7">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pazxag">
+        <inputEntry id="UnaryTests_06vyu4b">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1u94cfy">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_0fq5121" dmnElementRef="examRegistrationPeriod">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

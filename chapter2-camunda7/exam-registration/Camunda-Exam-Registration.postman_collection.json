@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "d9e2ac96-f63e-4d4d-8699-50ab75fe988d",
+		"name": "Camunda-Exam-Registration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30534044"
+	},
+	"item": [
+		{
+			"name": "Start-ExamRegistration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"student\": {\n      \"Vorname\": \"Jannik\",\n      \"Nachname\": \"Bergjan\",\n      \"email\": \"jannik.bergjan@uni.com\"\n    }\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/exam-registration/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"exam-registration",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

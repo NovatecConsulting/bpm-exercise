@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:camunda;DB_CLOSE_ON_EXIT=FALSE
+
+camunda:
+  bpm:
+    admin-user:
+      id: bpm
+      password: bpm
+    history-level: full
