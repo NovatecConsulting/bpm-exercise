@@ -7,9 +7,9 @@
         <groupId>de.novatec.bpm</groupId>
         <artifactId>bpm-training</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <groupId>de.novatec.bpm</groupId>
     <artifactId>exam-registration-c8</artifactId>
     <version>1.0.0</version>
 
@@ -21,7 +21,7 @@
         <spring-boot.version>3.3.4</spring-boot.version>
         <camunda.version>7.22.0</camunda.version>
 
-        <spring-zeebe.version>8.5.9</spring-zeebe.version>
+        <camunda-spring-sdk.version>8.6.5</camunda-spring-sdk.version>
         <camunda-7-adapter.version>0.10.1</camunda-7-adapter.version>
 
         <grpc.version>1.68.1</grpc.version>
@@ -48,48 +48,23 @@
             </dependency>
 
             <dependency>
-                <groupId>org.camunda.bpm</groupId>
-                <artifactId>camunda-bom</artifactId>
-                <version>${camunda.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
+                <groupId>io.camunda</groupId>
+                <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+                <version>${camunda-spring-sdk.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
 
     <dependencies>
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.camunda.bpm</groupId>
-            <artifactId>camunda-engine-plugin-spin</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.camunda.spin</groupId>
-            <artifactId>camunda-spin-dataformat-all</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
-        </dependency>
-
-<!--        <dependency>
-            <groupId>org.camunda.community.process_test_coverage</groupId>
-            <artifactId>camunda-process-test-coverage-starter-platform-7</artifactId>
-            <version>2.3.2</version>
-            <scope>test</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>org.camunda.community.process_test_coverage</groupId>
+                    <artifactId>camunda-process-test-coverage-starter-platform-7</artifactId>
+                    <version>2.3.2</version>
+                    <scope>test</scope>
+                </dependency>-->
 
         <dependency>
             <groupId>org.assertj</groupId>
@@ -136,12 +111,6 @@
             <version>23.0.1</version>
         </dependency>
 
-        <!-- Zeebe -->
-        <dependency>
-            <groupId>io.camunda</groupId>
-            <artifactId>zeebe-client-java</artifactId>
-            <version>${spring-zeebe.version}</version>
-        </dependency>
 
         <!-- adapter -->
         <dependency>

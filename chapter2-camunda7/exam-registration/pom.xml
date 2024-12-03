@@ -8,9 +8,9 @@
         <groupId>de.novatec.bpm</groupId>
         <artifactId>bpm-training</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <groupId>de.novatec.bpm</groupId>
     <artifactId>exam-registration</artifactId>
     <version>1.0.0</version>
 
