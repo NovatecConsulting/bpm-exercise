@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.24.0">
-  <bpmn:process id="exam-registration" isExecutable="true" camunda:historyTimeToLive="180">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.24.0" conversion:converterVersion="0.10.2-SNAPSHOT" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="exam-registration" name="converted-c8-exam-registration" processType="None" isClosed="false" isExecutable="true">
+    <bpmn:extensionElements>
+      <conversion:message severity="INFO">Unused attribute 'historyTimeToLive' on 'process' is removed.</conversion:message>
+    </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1" name="Start Exam&#10;Registration">
       <bpmn:extensionElements>
-        <camunda:executionListener delegateExpression="${startExecutionListener}" event="start" />
+        <conversion:message severity="TASK">Listener at 'start' with implementation '${startExecutionListener}' can be transformed to a job worker. Please adjust the job type.</conversion:message>
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_14y03xs</bpmn:outgoing>
     </bpmn:startEvent>
@@ -19,7 +22,10 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0sfx4hj" sourceRef="registrationPeriodCheckDMN" targetRef="Gateway_099csfx" />
     <bpmn:sequenceFlow id="Flow_1plss2m" name="Yes" sourceRef="Gateway_099csfx" targetRef="examEnrollmentDelegate">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isRegistrationPeriod}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${isRegistrationPeriod}' -&gt; '=isRegistrationPeriod'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isRegistrationPeriod</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="End_Rejection" name="End">
       <bpmn:incoming>Flow_1fez0bj</bpmn:incoming>
@@ -30,50 +36,50 @@
       <bpmn:outgoing>Flow_1dc5ikd</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_042c536" name="Yes" sourceRef="Gateway_1xe431k" targetRef="registrationPeriodCheckDMN">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${studentExists}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${studentExists}' -&gt; '=studentExists'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=studentExists</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_StudentDoesNotExist" name="End">
       <bpmn:incoming>Flow_1dc5ikd</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1dc5ikd" name="No" sourceRef="Gateway_1xe431k" targetRef="EndEvent_StudentDoesNotExist">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!studentExists}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${!studentExists}' -&gt; '=not(studentExists)'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(studentExists)</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sendTask id="sendLateRegistrationDelegate" name="Send Note on late registration" camunda:delegateExpression="${emailDelegate}">
-      <bpmn:extensionElements />
+    <bpmn:sendTask id="sendLateRegistrationDelegate" name="Send Note on late registration" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'delegateExpression' on 'sendTask' was mapped. Delegate call to '${emailDelegate}' was transformed to job type 'camunda-7-adapter'. Please review your implementation.</conversion:message>
+        <zeebe:taskHeaders>
+          <zeebe:header key="delegateExpression" value="${emailDelegate}" />
+        </zeebe:taskHeaders>
+        <zeebe:taskDefinition type="camunda-7-adapter" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_01ysuxq</bpmn:incoming>
       <bpmn:outgoing>Flow_0qxe7hk</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="sendConfirmationDelegate" name="Send confirmation" camunda:delegateExpression="${emailDelegate}">
+    <bpmn:sendTask id="sendConfirmationDelegate" name="Send confirmation" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'delegateExpression' on 'sendTask' was mapped. Delegate call to '${emailDelegate}' was transformed to job type 'camunda-7-adapter'. Please review your implementation.</conversion:message>
+        <zeebe:taskHeaders>
+          <zeebe:header key="delegateExpression" value="${emailDelegate}" />
+        </zeebe:taskHeaders>
+        <zeebe:taskDefinition type="camunda-7-adapter" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0fd49ph</bpmn:incoming>
       <bpmn:outgoing>Flow_13v3o42</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="Flow_13v3o42" sourceRef="sendConfirmationDelegate" targetRef="End_Confirmation" />
-    <bpmn:userTask id="userTaskLateRegistration" name="Submit late registration" camunda:candidateGroups="students">
+    <bpmn:userTask id="userTaskLateRegistration" name="Submit late registration" implementation="##unspecified">
       <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="email" label="Email" type="string">
-            <camunda:properties />
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="course" label="Course" type="string">
-            <camunda:properties />
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="submitLateRegistration" label="Submit for late Registration?" type="boolean" defaultValue="false">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="reasonStudent" label="Reason" type="string">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-        </camunda:formData>
+        <conversion:message severity="TASK">Element 'formData' cannot be transformed. Please define a form key instead.</conversion:message>
+        <conversion:message link="https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/#assignments" severity="REVIEW">Attribute 'candidateGroups' on 'userTask' was mapped. Please review transformed expression: 'students' -&gt; 'students'.</conversion:message>
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition assignee="" candidateGroups="students" candidateUsers="" />
+        <zeebe:formDefinition formId="" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0qxe7hk</bpmn:incoming>
       <bpmn:outgoing>Flow_1i1p4vo</bpmn:outgoing>
@@ -81,34 +87,13 @@
     <bpmn:endEvent id="EndEvent_NoSubmitForLateRegistrationAfter7Days" name="End">
       <bpmn:incoming>Flow_0rgwxjj</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="userTaskLateRegistrationCheck" name="Late registration &#10;check" camunda:candidateGroups="examinationoffice">
+    <bpmn:userTask id="userTaskLateRegistrationCheck" name="Late registration &#10;check" implementation="##unspecified">
       <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="email" label="Email" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="course" label="Course" type="string">
-            <camunda:properties />
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="reasonStudent" label="Reason of the Student" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="lateRegistrationAccepted" label="Accept Late Registration" type="boolean" defaultValue="false">
-            <camunda:validation />
-          </camunda:formField>
-          <camunda:formField id="reasonExaminationOffice" label="Reason of the Examination Office" type="string">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-        </camunda:formData>
+        <conversion:message severity="TASK">Element 'formData' cannot be transformed. Please define a form key instead.</conversion:message>
+        <conversion:message link="https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/#assignments" severity="REVIEW">Attribute 'candidateGroups' on 'userTask' was mapped. Please review transformed expression: 'examinationoffice' -&gt; 'examinationoffice'.</conversion:message>
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition assignee="" candidateGroups="examinationoffice" candidateUsers="" />
+        <zeebe:formDefinition formId="Form_LateRegistrationCheck" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1i1p4vo</bpmn:incoming>
       <bpmn:outgoing>Flow_02twy0i</bpmn:outgoing>
@@ -120,18 +105,38 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_02twy0i" sourceRef="userTaskLateRegistrationCheck" targetRef="Gateway_10nfkwp" />
     <bpmn:sequenceFlow id="Flow_010x1xa" name="No" sourceRef="Gateway_10nfkwp" targetRef="sendRejectionDelegate">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!lateRegistrationAccepted}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${!lateRegistrationAccepted}' -&gt; '=not(lateRegistrationAccepted)'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(lateRegistrationAccepted)</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="examEnrollmentDelegate" name="Exam Enrollment" camunda:delegateExpression="${examEnrollmentDelegate}">
+    <bpmn:serviceTask id="examEnrollmentDelegate" name="Exam Enrollment" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'delegateExpression' on 'serviceTask' was mapped. Delegate call to '${examEnrollmentDelegate}' was transformed to job type 'camunda-7-adapter'. Please review your implementation.</conversion:message>
+        <zeebe:taskHeaders>
+          <zeebe:header key="delegateExpression" value="${examEnrollmentDelegate}" />
+        </zeebe:taskHeaders>
+        <zeebe:taskDefinition type="camunda-7-adapter" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1plss2m</bpmn:incoming>
       <bpmn:incoming>Flow_1o6yfs2</bpmn:incoming>
       <bpmn:outgoing>Flow_0fd49ph</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0fd49ph" sourceRef="examEnrollmentDelegate" targetRef="sendConfirmationDelegate" />
     <bpmn:sequenceFlow id="Flow_1o6yfs2" name="Yes" sourceRef="Gateway_10nfkwp" targetRef="examEnrollmentDelegate">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${lateRegistrationAccepted}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${lateRegistrationAccepted}' -&gt; '=lateRegistrationAccepted'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=lateRegistrationAccepted</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sendTask id="sendRejectionDelegate" name="Send rejection" camunda:delegateExpression="${emailDelegate}">
+    <bpmn:sendTask id="sendRejectionDelegate" name="Send rejection" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'delegateExpression' on 'sendTask' was mapped. Delegate call to '${emailDelegate}' was transformed to job type 'camunda-7-adapter'. Please review your implementation.</conversion:message>
+        <zeebe:taskHeaders>
+          <zeebe:header key="delegateExpression" value="${emailDelegate}" />
+        </zeebe:taskHeaders>
+        <zeebe:taskDefinition type="camunda-7-adapter" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_010x1xa</bpmn:incoming>
       <bpmn:outgoing>Flow_1fez0bj</bpmn:outgoing>
     </bpmn:sendTask>
@@ -143,17 +148,32 @@
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0rgwxjj" sourceRef="Event_1ai8okv" targetRef="EndEvent_NoSubmitForLateRegistrationAfter7Days" />
-    <bpmn:businessRuleTask id="registrationPeriodCheckDMN" name="Registration&#10;Period&#10;Check" camunda:resultVariable="isRegistrationPeriod" camunda:decisionRef="examRegistrationPeriod" camunda:mapDecisionResult="singleEntry">
-      <bpmn:extensionElements />
+    <bpmn:businessRuleTask id="registrationPeriodCheckDMN" name="Registration&#10;Period&#10;Check" implementation="##unspecified">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'resultVariable' on 'businessRuleTask' was mapped.</conversion:message>
+        <conversion:message severity="REVIEW">Attribute 'decisionRef' on 'businessRuleTask' was mapped. Please review transformed expression: 'examRegistrationPeriod' -&gt; 'examRegistrationPeriod'.</conversion:message>
+        <conversion:message severity="INFO">Unused attribute 'mapDecisionResult' on 'businessRuleTask' is removed.</conversion:message>
+        <zeebe:calledDecision decisionId="examRegistrationPeriod" resultVariable="isRegistrationPeriod" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_042c536</bpmn:incoming>
       <bpmn:outgoing>Flow_0sfx4hj</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:serviceTask id="studentExistsDelegate" name="Student Exists&#10;Check" camunda:delegateExpression="${studentDelegate}">
+    <bpmn:serviceTask id="studentExistsDelegate" name="Student Exists&#10;Check" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'delegateExpression' on 'serviceTask' was mapped. Delegate call to '${studentDelegate}' was transformed to job type 'camunda-7-adapter'. Please review your implementation.</conversion:message>
+        <zeebe:taskHeaders>
+          <zeebe:header key="delegateExpression" value="${studentDelegate}" />
+        </zeebe:taskHeaders>
+        <zeebe:taskDefinition type="camunda-7-adapter" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_14y03xs</bpmn:incoming>
       <bpmn:outgoing>Flow_1texf0d</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_01ysuxq" name="No" sourceRef="Gateway_099csfx" targetRef="sendLateRegistrationDelegate">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isRegistrationPeriod}</bpmn:conditionExpression>
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '${!isRegistrationPeriod}' -&gt; '=not(isRegistrationPeriod)'.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(isRegistrationPeriod)</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1i1p4vo" sourceRef="userTaskLateRegistration" targetRef="userTaskLateRegistrationCheck" />
     <bpmn:sequenceFlow id="Flow_0qxe7hk" sourceRef="sendLateRegistrationDelegate" targetRef="userTaskLateRegistration" />
@@ -165,21 +185,20 @@ or
 StudentCRM-Frontend
 (set {email} of Student and {course})</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0wcou8f" sourceRef="StartEvent_1" targetRef="TextAnnotation_102ay62" />
+    <bpmn:association id="Association_0wcou8f" associationDirection="None" sourceRef="StartEvent_1" targetRef="TextAnnotation_102ay62" />
     <bpmn:textAnnotation id="TextAnnotation_06vahkg">
       <bpmn:text>Service which class the StudentBackend and ask if the Student (email) is Set</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_189g97o" sourceRef="studentExistsDelegate" targetRef="TextAnnotation_06vahkg" />
+    <bpmn:association id="Association_189g97o" associationDirection="None" sourceRef="studentExistsDelegate" targetRef="TextAnnotation_06vahkg" />
     <bpmn:textAnnotation id="TextAnnotation_1c46idh">
       <bpmn:text>Student must apply for late registration and give reasons</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0zr1dqy" sourceRef="userTaskLateRegistration" targetRef="TextAnnotation_1c46idh" />
+    <bpmn:association id="Association_0zr1dqy" associationDirection="None" sourceRef="userTaskLateRegistration" targetRef="TextAnnotation_1c46idh" />
     <bpmn:textAnnotation id="TextAnnotation_0usb7gj">
       <bpmn:text>Examination office must approve or reject with reasons</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_1iqsyoa" sourceRef="userTaskLateRegistrationCheck" targetRef="TextAnnotation_0usb7gj" />
+    <bpmn:association id="Association_1iqsyoa" associationDirection="None" sourceRef="userTaskLateRegistrationCheck" targetRef="TextAnnotation_0usb7gj" />
   </bpmn:process>
-  <bpmn:message id="Message_1r7fhbm" name="Message_1r7fhbm" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="exam-registration">
       <bpmndi:BPMNShape id="BPMNShape_198yqg1" bpmnElement="StartEvent_1">

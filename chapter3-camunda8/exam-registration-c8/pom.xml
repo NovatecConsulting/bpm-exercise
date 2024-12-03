@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -11,21 +10,39 @@
     </parent>
 
     <groupId>de.novatec.bpm</groupId>
-    <artifactId>exam-registration</artifactId>
+    <artifactId>exam-registration-c8</artifactId>
     <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <spring-boot.version>3.3.4</spring-boot.version>
+        <camunda.version>7.22.0</camunda.version>
+
+        <spring-zeebe.version>8.5.9</spring-zeebe.version>
+        <camunda-7-adapter.version>0.10.1</camunda-7-adapter.version>
+
+        <grpc.version>1.68.1</grpc.version>
+
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>${grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.2.1</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -33,12 +50,13 @@
             <dependency>
                 <groupId>org.camunda.bpm</groupId>
                 <artifactId>camunda-bom</artifactId>
-                <version>7.20.0</version>
+                <version>${camunda.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <dependencies>
         <dependency>
@@ -66,12 +84,12 @@
             <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.camunda.community.process_test_coverage</groupId>
             <artifactId>camunda-process-test-coverage-starter-platform-7</artifactId>
             <version>2.3.2</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.assertj</groupId>
@@ -88,7 +106,7 @@
         <dependency>
             <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-engine-rest-openapi</artifactId>
-            <version>7.20.0-alpha1</version>
+            <version>${camunda.version}</version>
         </dependency>
 
         <dependency>
@@ -118,6 +136,20 @@
             <version>23.0.1</version>
         </dependency>
 
+        <!-- Zeebe -->
+        <dependency>
+            <groupId>io.camunda</groupId>
+            <artifactId>zeebe-client-java</artifactId>
+            <version>${spring-zeebe.version}</version>
+        </dependency>
+
+        <!-- adapter -->
+        <dependency>
+            <groupId>org.camunda.community.migration</groupId>
+            <artifactId>camunda-7-adapter</artifactId>
+            <version>${camunda-7-adapter.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -125,12 +157,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <systemPropertyVariables>
                         <camunda-process-test-coverage.target-dir-root>${project.build.directory}/my-coverage-reports/</camunda-process-test-coverage.target-dir-root>

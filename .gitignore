@@ -84,3 +84,4 @@ nb-configuration.xml
 ## Specific
 ##############################
 db/
+application-local.properties
