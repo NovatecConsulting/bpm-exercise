@@ -1,6 +1,6 @@
-# BPM-Training Project
+# BPM-Exercise Project
 
-### Welcome to the Novatec BPM-Training Project!
+### Welcome to the Novatec BPM-Exercise Project!
 
 We have created this repository to familiarize our internal trainees with the topic of BPM. It is divided into two
 chapters: 
