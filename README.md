@@ -13,8 +13,7 @@ Therefore, you´re going to model a process by a given business context.
 The second chapter also includes to implement your previously modeled bpmn-process with Camunda7 and
 Spring-Boot.
 
-3. The third chapter deals with a first simple migration from Camunda 7 to Camunda 8 with the integeration of the 'camunda-7-adapter' community project.
-
+3. The third chapter deals with the migration from Camunda 7 to Camunda 8.
 ---
 
 ### [Chapter1: BPMN 2.0](/chapter1-bpmn/readme.md)
@@ -27,9 +26,10 @@ Spring-Boot.
 - Learning Videos: Camunda 7 by Camunda
 - Develop Camunda 7 Application 'exam-registration'
 
-### Chapter 3: Camunda 7 to Camunda 8 migration with [camunda-7-adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration)
+### Chapter 3: Camunda 7 to Camunda 8 migration
 
-- 
+- First simple migration from Camunda 7 to Camunda 8 with the integeration of the 'camunda-7-adapter' community project.
+
 ---
 
 <a href="https://www.novatec-gmbh.de/services/business-process-management/" source="_blank">
