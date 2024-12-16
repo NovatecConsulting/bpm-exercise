@@ -17,7 +17,7 @@ In the linked chapters you will find the respective solution for the task set. P
 
 ### [Chapter3: Camunda 8](/chapter3-camunda8/readme.md)
 
-- Solution: Camunda 8 Application 'exam-registration-c8'
+- Solution 1: Camunda 8 Application 'exam-registration-c8' with camunda-7-adapter
 
 ---
 
