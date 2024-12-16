@@ -11,8 +11,9 @@ Therefore, you´re going to model a process by a given business context.
 
 2. The second chapter deals with Camunda 7 and will give you an introduction to process automation.
 The second chapter also includes to implement your previously modeled bpmn-process with Camunda7 and
-Spring-Boot.</p>
+Spring-Boot.
 
+3. The third chapter deals with the migration from Camunda 7 to Camunda 8.
 ---
 
 ### [Chapter1: BPMN 2.0](/chapter1-bpmn/readme.md)
@@ -24,6 +25,10 @@ Spring-Boot.</p>
 
 - Learning Videos: Camunda 7 by Camunda
 - Develop Camunda 7 Application 'exam-registration'
+
+### [Chapter 3: Camunda 7 to Camunda 8 migration](/chapter3-camunda8/readme.md)
+
+- First simple migration from Camunda 7 to Camunda 8 with the integeration of the 'camunda-7-adapter' community project.
 
 ---
 

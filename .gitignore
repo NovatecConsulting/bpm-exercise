@@ -25,3 +25,5 @@ replay_pid*
 
 # IntelliJ-Folder
 .idea/
+
+application-local.properties
