@@ -25,6 +25,7 @@
         <camunda-7-adapter.version>0.10.1</camunda-7-adapter.version>
 
         <grpc.version>1.68.1</grpc.version>
+        <assertj-core.version>3.25.1</assertj-core.version>
 
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
@@ -56,7 +57,6 @@
         </dependencies>
     </dependencyManagement>
 
-
     <dependencies>
 
         <!--        <dependency>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.25.1</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -110,7 +110,6 @@
             <artifactId>js-scriptengine</artifactId>
             <version>23.0.1</version>
         </dependency>
-
 
         <!-- adapter -->
         <dependency>

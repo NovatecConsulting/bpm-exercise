@@ -15,6 +15,10 @@ In the linked chapters you will find the respective solution for the task set. P
 
 - Solution: Camunda 7 Application 'exam-registration'
 
+### [Chapter3: Camunda 8](/chapter3-camunda8/readme.md)
+
+- Solution: Camunda 8 Application 'exam-registration-c8'
+
 ---
 
 <a href="https://www.novatec-gmbh.de/services/business-process-management/" source="_blank">
