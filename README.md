@@ -26,7 +26,7 @@ Spring-Boot.
 - Learning Videos: Camunda 7 by Camunda
 - Develop Camunda 7 Application 'exam-registration'
 
-### Chapter 3: Camunda 7 to Camunda 8 migration
+### [Chapter 3: Camunda 7 to Camunda 8 migration](/chapter3-camunda8/readme.md)
 
 - First simple migration from Camunda 7 to Camunda 8 with the integeration of the 'camunda-7-adapter' community project.
 
